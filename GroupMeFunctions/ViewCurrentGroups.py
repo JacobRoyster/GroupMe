@@ -6,7 +6,7 @@ def ViewCurrentGroups(userToken):
     standardBeginning = "https://api.groupme.com/v3/groups"
 
     # GroupMe API Defines maximum per_page value as 500. We use this value.
-    inputParameters = { "per_page" : 500 , "omit" : "memberships"  }
+    inputParameters = { "per_page" : 500   }
 
     # Assembling the request
     response = requests.get((standardBeginning + "?token=" + userToken), params = inputParameters )
@@ -23,7 +23,6 @@ def ViewCurrentGroups(userToken):
     # Printing out entire json resonse package
     if (jsonInterpretedResponse['meta']['code'] == 200):
         # We have a least sent a validly formatted packet and recieved a response
-        print("valid")
         for i in range(len(jsonInterpretedResponse['response'])):
             print(jsonInterpretedResponse['response'][i])
     else:
