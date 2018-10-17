@@ -1,6 +1,10 @@
 import requests
 import json
 import sys
+"""
+userToken should be a valid GroupMe  user token. (string)
+purpose of this function is to get information for all of the groups the user that corresponds with the user token is in
+"""
 def ViewCurrentGroups(userToken):
     # Standard start for the request string for the GroupMe API
     standardBeginning = "https://api.groupme.com/v3/groups"
