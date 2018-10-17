@@ -23,4 +23,10 @@ def RemoveFromGroup(userToken, groupID, userID):
     non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode +1), 0xfffd)
     jsonInterpretedResponse = json.loads(response.text.translate(non_bmp_map))
 
-    if (
+    # Printing out entire json resonse package
+    if (jsonInterpretedResponse['meta']['code'] == 200):
+        # We have a least sent a validly formatted packet and recieved a response
+        return()
+    else:
+        print(jsonInterpretedResponse) 
+        sys.exit(-1)
