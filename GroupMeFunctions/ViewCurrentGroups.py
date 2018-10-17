@@ -23,8 +23,7 @@ def ViewCurrentGroups(userToken):
     # Printing out entire json resonse package
     if (jsonInterpretedResponse['meta']['code'] == 200):
         # We have a least sent a validly formatted packet and recieved a response
-        for i in range(len(jsonInterpretedResponse['response'])):
-            print(jsonInterpretedResponse['response'][i])
+        return(jsonInterpretedResponse['response'])
     else:
         print(jsonInterpretedResponse) 
         sys.exit(-1)
@@ -33,9 +32,14 @@ def TestViewCurrentGroups():
     # Load in my token, then use that token to view the groups
     with open("C://Users//Public//Documents//groupmetoken.txt") as f:
         data = f.read()
-    ViewCurrentGroups(data)
+    # Should have an array of the dicts for the first 500 groups
+    returnedArrayOfDicts = ViewCurrentGroups(data)
+    print("Full data for all groups")
+    for i in range(len(returnedArrayOfDicts)):
+        print(returnedArrayOfDicts[i])
+    print("Names of all groups")
+    for i in range(len(returnedArrayOfDicts)):
+        print(returnedArrayOfDicts[i]['name'])
 
 
-TestViewCurrentGroups()
-
-
+        
