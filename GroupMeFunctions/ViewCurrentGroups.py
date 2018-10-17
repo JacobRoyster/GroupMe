@@ -21,10 +21,17 @@ def ViewCurrentGroups(userToken):
     jsonInterpretedResponse = json.loads(response.text.translate(non_bmp_map))
 
     # Printing out entire json resonse package
-    print(jsonInterpretedResponse)
-    print(jsonInterpretedResponse['response'][0]) 
+    if (jsonInterpretedResponse['meta']['code'] == 200):
+        # We have a least sent a validly formatted packet and recieved a response
+        print("valid")
+        for i in range(len(jsonInterpretedResponse['response'])):
+            print(jsonInterpretedResponse['response'][i])
+    else:
+        print(jsonInterpretedResponse) 
+        sys.exit(-1)
 
 def TestViewCurrentGroups():
+    # Load in my token, then use that token to view the groups
     with open("C://Users//Public//Documents//groupmetoken.txt") as f:
         data = f.read()
     ViewCurrentGroups(data)
