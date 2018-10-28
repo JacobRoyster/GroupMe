@@ -24,9 +24,19 @@ def RemoveFromGroup(userToken, groupID, userID):
     jsonInterpretedResponse = json.loads(response.text.translate(non_bmp_map))
 
     # Printing out entire json resonse package
-    if (jsonInterpretedResponse['meta']['code'] == 200):
+    if (jsonInterpretedResponse['meta']['code'] < 400):
         # We have a least sent a validly formatted packet and recieved a response
         return()
     else:
         print(jsonInterpretedResponse) 
-        sys.exit(-1)
+        raise ValueError("We have a packet with a meta code != 200")
+
+def TestRemoveFromGroup():
+    # Load in my token, then use that token to view the groups
+    with open("C://Users//Public//Documents//groupmetoken.txt") as f:
+        userToken = f.read()
+    with open("C://Users//Public//Documents//groupmegroupid.txt") as f:
+        groupID = f.read()
+    with open("C://Users//Public//Documents//groupmetestdummyid.txt") as f:
+        testdummyid = f.read()
+    RemoveFromGroup(str(userToken),str(groupID),str(testdummyid))

@@ -25,12 +25,12 @@ def ViewCurrentGroups(userToken):
     jsonInterpretedResponse = json.loads(response.text.translate(non_bmp_map))
 
     # Printing out entire json resonse package
-    if (jsonInterpretedResponse['meta']['code'] == 200):
+    if (jsonInterpretedResponse['meta']['code'] < 400):
         # We have a least sent a validly formatted packet and recieved a response
         return(jsonInterpretedResponse['response'])
     else:
         print(jsonInterpretedResponse) 
-        sys.exit(-1)
+        raise ValueError("We have a packet with a meta code != 200")
 
 def TestViewCurrentGroups():
     # Load in my token, then use that token to view the groups
@@ -44,6 +44,3 @@ def TestViewCurrentGroups():
     print("Names of all groups")
     for i in range(len(returnedArrayOfDicts)):
         print(returnedArrayOfDicts[i]['name'])
-
-
-        
